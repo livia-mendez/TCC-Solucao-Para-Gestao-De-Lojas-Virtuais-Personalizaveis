@@ -1,0 +1,1 @@
+# TCC-Solu-o-Para-Gestao-De-Lojas-Virtuais-Personalizaveis
