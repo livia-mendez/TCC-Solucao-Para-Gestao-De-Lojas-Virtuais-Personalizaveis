@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home - EasyStore
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Cabeçalho -->
+    <header id="titulo-home">
+
+        <div class="boas-vindas">
+            <i class="fas fa-store icone-loja"></i>
+            <div class="texto-header">
+                <h1>Olá, Empresa X!</h1>
+                <p>Aqui está o resumo da sua loja hoje.</p>
+            </div>
+
+        </div>
+        <img id="img-logo" src="/static/images/store.jpg" alt="Ilustração da Loja">
+    </header>
+
+    <!-- Container dos Cards -->
+    <section id="cards-home-inicio">
+
+        <div class="cards card-resumo" id="card-pedidos">
+            <i class="fas fa-box icone-circulo"></i>
+
+            <div class="card-layout">
+                <span class="card-numero">12</span>
+                <h2>Pedidos hoje</h2>
+                <p>↑ +4 em relação a ontem</p>
+            </div>
+        </div>
+
+        <div class="cards card-resumo" id="card-pendentes">
+            <i class="fas fa-clipboard-list icone-circulo"></i>
+
+            <div class="card-layout">
+                <span class="card-numero">2</span>
+                <h2>Pendentes</h2>
+
+                <a href="/pedidos"
+                class="btn-proximo"
+                aria-label="Ir para a página de pedidos pendentes">
+                    Aguardando confirmação
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="cards card-resumo" id="card-produtos">
+            <i class="fas fa-store icone-circulo"></i>
+
+            <div class="card-layout">
+                <span class="card-numero">40</span>
+                <h2>Produtos</h2>
+
+                <a href="/produtos"
+                class="btn-proximo"
+                aria-label="Ir para a página de produtos">
+                    No seu catálogo
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+
+    <br>
+    <hr>
+
+    <div class="section-favs">
+        <i class="fas fa-star icone-circulo"></i>
+
+        <div class="section-favs-texto">
+            <h1>O que você deseja fazer?</h1>
+            <p>Acesse rapidamente as principais funcionalidades da sua loja</p>
+        </div>
+    </div>
+
+
+    <section id="cards-home-final">    
+
+        <div class="cards card-resumo">
+            <i class="fas fa-clipboard-list icone-circulo"></i>
+
+            <div class="card-layout">
+                <h2>+ Novo Produto</h2>
+                <p>Adicione um novo produto ao seu catálogo.</p>
+                <a href="/produtos" class="btn-proximo-final" aria-label="Ir para a página de produtos">
+                    Adicionar
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="cards card-resumo">
+            <i class="fas fa-clipboard-list icone-circulo"></i>
+            
+            <div class="card-layout">
+                <h2>Pedidos Pendentes</h2>
+                <p>Confira e gerencie os pedidos recebidos.</p>
+                <a href="/pedidos" class="btn-proximo-final" aria-label="Ir para a página de pedidos pendentes">
+                    Visualizar
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="cards card-resumo">
+            <i class="fas fa-clipboard-list icone-circulo"></i>
+            
+            <div class="card-layout">
+                <h2>Personalizar Loja</h2>
+                <p>Altere o visualda sua loja (com cores, logo e textos).</p>
+                <a href="/personalizar" class="btn-proximo-final" aria-label="Ir para a página de personalização da loja">
+                    Personalizar
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="cards card-resumo">
+            <i class="fas fa-clipboard-list icone-circulo"></i>
+            
+            <div class="card-layout">
+                <h2>Visualizar Loja</h2>
+                <p>Veja como sua loja está para seus clientes.</p>
+                <a href="/visualizar" class="btn-proximo-final" aria-label="Ir para a página de visualização da loja">
+                    Visualizar
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="cards card-resumo">
+            <i class="fas fa-clipboard-list icone-circulo" ></i>
+            
+            <div class="card-layout">
+                <h2>Categorias</h2>
+                <p>Organize seus produtos por categoria.</p>
+                <a href="/pedidos" class="btn-proximo-final" aria-label="Ir para a página de pedidos pendentes">
+                    Gerenciar
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="cards card-resumo">
+            <i class="fas fa-clipboard-list icone-circulo"></i>
+            
+            <div class="card-layout">
+                <h2>Configurações</h2>
+                <p>Atualize seus dados e informações da sua empresa.</p>
+                <a href="/configuracoes" class="btn-proximo-final" aria-label="Ir para a página de configurações">
+                    Editar
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Loja</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+
+<body>
+    <main class="container-principal">
+
+        <div class="card">
+
+            <section class="menu" id="menu-esquerdo">
+                <h1>EasyStore</h1>
+            </section>
+
+            <section class="menu" id="menu-direito">
+                <h1>Cadastro</h1>
+                <p>Preencha os dados abaixo para criar sua conta</p>
+                <br>
+
+                <form action="/cadastro" method="post">
+
+                    <div class="campo-form">
+                        <label for="nome">Nome da Empresa *</label>
+                        <input type="text"
+                            id="nome"
+                            placeholder="Ex: EasyStore"
+                            name="nome"
+                            required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="telefone">Telefone *</label>
+                        <input type="text"
+                            id="telefone"
+                            placeholder="(XX) XXXXX-XXXX"
+                            name="telefone"
+                            required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="email">Email *</label>
+                        <input type="email"
+                            id="email"
+                            placeholder="Ex: exemplo@gmail.com"
+                            name="email"
+                            required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="senha">Senha *</label>
+                        <input type="password"
+                            id="senha"
+                            placeholder="Digite sua senha"
+                            name="senha"
+                            required>
+                    </div>
+
+                    <div class="campo-form">
+                        <label for="confirma-senha">Confirme sua senha *</label>
+                        <input type="password"
+                            id="confirma-senha"
+                            placeholder="Confirme sua senha"
+                            name="confirma_senha"
+                            required>
+                    </div>
+
+                    <div class="logo-container">
+
+                        <div id="preview">
+                            <img id="preview-image"
+                                src="/static/img/icon upload.svg"
+                                alt="Pré-visualização da imagem">
+                        </div>
+
+                        <div class="logo-content">
+
+                            <label for="upload" class="logo-label">
+                                Logo da Empresa
+                            </label>
+
+                            <p id="text-add-logo">
+                                Adicione a logo do seu negócio (opcional)
+                            </p>
+
+                            <input id="upload"
+                                type="file"
+                                name="logo"
+                                hidden>
+
+                            <label for="upload" class="upload-button">
+                                <img src="/static/img/icon upload.svg" alt="Upload">
+                                <span>Selecionar Imagem</span>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit">Cadastrar</button>
+
+                    <p id="conta">
+                        Já possui uma conta?
+                        <a href="/login">Entrar</a>
+                    </p>
+
+                </form>
+
+
+            </section>
+
+        </div>
+
+    </main>
+</body>
+
+</html>
+    

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Produtos - EasyStore
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/produtos.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/modal-produto.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<header id="titulo">
+
+    <div class="titulo-produtos">
+
+        <i class="fas fa-box icone-loja"></i>
+
+        <div class="texto-header">
+            <h1>Meus Produtos</h1>
+            <p>Gerencie os produtos da sua loja de forma simples e rápida.</p>
+        </div>
+
+    </div>
+
+    <button
+        type="button"
+        class="btn-novo-produto"
+        id="btnAbrirModal"
+    >
+        + Adicionar Produto
+    </button>
+
+</header>
+
+
+<section class="card-produtos">
+
+    {% if produtos %}
+
+        {% for produto in produtos %}
+
+            <div class="cards">
+
+                <img
+                    src="{{ produto.imagem if produto.imagem else '/static/img/produto-sem-imagem.png' }}"
+                    alt="{{ produto.nome }}"
+                >
+
+                <div class="info-produto">
+
+                    <h3>{{ produto.nome }}</h3>
+
+                    <h2>
+                        R$ {{ "%.2f"|format(produto.valorBase)|replace(".", ",") }}
+                    </h2>
+
+                </div>
+
+                <div class="info-estoque">
+
+                    <i class="fas fa-circle"></i>
+
+                    <h4>
+                        {% if produto.estoque > 0 %}
+                            Em estoque ({{ produto.estoque }})
+                        {% else %}
+                            Sem estoque
+                        {% endif %}
+                    </h4>
+
+                </div>
+
+                <div class="edit-delete">
+
+                    <button type="button">
+                        <i class="fas fa-pen"></i>
+                        Editar
+                    </button>
+
+                    <button
+                        type="button"
+                        title="Excluir produto"
+                        data-id="{{ produto.idProduto }}"
+                    >
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="nenhum-produto">
+
+            <i class="fas fa-box-open"></i>
+
+            <h3>Nenhum produto cadastrado</h3>
+
+            <p>
+                Clique em "+ Adicionar Produto"
+                para cadastrar seu primeiro produto.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- Modal de cadastro de produto -->
+{% include "partials/modal_produto.html" %}
+
+
+<script src="{{ url_for('static', filename='js/produtos.js') }}"></script>
+
+{% endblock %}

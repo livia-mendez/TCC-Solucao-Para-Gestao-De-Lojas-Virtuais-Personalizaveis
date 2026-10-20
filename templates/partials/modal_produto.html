@@ -1,0 +1,311 @@
+
+<div
+    class="modal"
+    id="modalProduto"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tituloModalProduto"
+>
+    <div class="modal-produto">
+
+        <!-- Cabeçalho -->
+        <div class="modal-header">
+            <h2 id="tituloModalProduto">Adicionar Produto</h2>
+
+            <button
+                type="button"
+                class="btn-fechar-modal"
+                id="btnFecharModal"
+                aria-label="Fechar modal"
+            >
+                &times;
+            </button>
+        </div>
+
+        <!-- Indicador de etapas -->
+        <div class="indicador-etapas">
+            <div class="linha-etapas"></div>
+            <span class="etapa-atual" id="etapaAtual"></span>
+        </div>
+
+        <form
+            action="{{ url_for('cadastrar_produto') }}"
+            method="POST"
+            id="formProduto"
+        >
+
+            <!-- ETAPA 1: INFORMAÇÕES BÁSICAS -->
+            <section class="etapa-formulario ativa" id="etapa1">
+
+                <div class="formulario-card">
+                    <div class="titulo-modal">
+                        <h3>Informações Básicas</h3>
+                        <p>Preencha as informações do produto.</p>
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="coluna-esquerda">
+
+                            <div class="campo">
+                                <label for="nome">Nome: *</label>
+                                <input
+                                    type="text"
+                                    id="nome"
+                                    name="nome"
+                                    maxlength="150"
+                                    required
+                                >
+                            </div>
+
+                            <div class="campo">
+                                <label for="descricao">Descrição: *</label>
+                                <textarea
+                                    id="descricao"
+                                    name="descricao"
+                                    maxlength="1200"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <div class="campo campo-variacoes">
+                                <label
+                                    class="checkbox-container"
+                                    for="possuiVariacoes"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        id="possuiVariacoes"
+                                        name="possuiVariacoes"
+                                        value="1"
+                                    >
+                                    <span>Produto possui variações?</span>
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="coluna-direita">
+
+                            <div class="campo" id="campoValor">
+                                <label for="valorBase">Valor base: *</label>
+                                <div class="input-prefixo">
+                                    <span>R$</span>
+                                    <input
+                                        type="text"
+                                        id="valorBase"
+                                        name="valorBase"
+                                        inputmode="decimal"
+                                        placeholder="0,00"
+                                        required
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="campo">
+                                <label for="idCategoria">Categoria: *</label>
+                                <select
+                                    id="idCategoria"
+                                    name="idCategoria"
+                                    required
+                                >
+                                    <option value="">Selecione</option>
+
+                                    {% for categoria in categorias %}
+                                        <option
+                                            value="{{ categoria.idCategoria }}"
+                                        >
+                                            {{ categoria.nome }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label for="codigoSKU">Código SKU: *</label>
+                                <input
+                                    type="text"
+                                    id="codigoSKU"
+                                    name="codigoSKU"
+                                    maxlength="50"
+                                    required
+                                >
+                            </div>
+
+                            <div class="campo" id="campoEstoque">
+                                <label for="estoque">Estoque: *</label>
+                                <input
+                                    type="number"
+                                    id="estoque"
+                                    name="estoque"
+                                    min="0"
+                                    step="1"
+                                    value="0"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ETAPA 2: ATRIBUTOS E VARIAÇÕES -->
+            <section
+                class="etapa-formulario"
+                id="etapa2"
+                hidden
+            >
+                <div class="formulario-card">
+
+                    <div class="titulo-modal">
+                        <h3>Atributos e Variações</h3>
+                        <p>
+                            Defina as características e opções do produto.
+                        </p>
+                    </div>
+
+                    <!-- Atributos já adicionados -->
+                    <div id="listaAtributos">
+                        <p class="mensagem-vazia" id="mensagemAtributos">
+                            Nenhum atributo adicionado.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn-novo-atributo"
+                        id="btnNovoAtributo"
+                    >
+                        + Novo atributo
+                    </button>
+
+                    <!-- Formulário expansível de atributo -->
+                    <div
+                        class="form-atributo"
+                        id="formAtributo"
+                        hidden
+                    >
+                        <h4>Novo atributo</h4>
+
+                        <div class="campo">
+                            <label for="nomeAtributo">
+                                Nome do atributo
+                            </label>
+                            <input
+                                type="text"
+                                id="nomeAtributo"
+                                placeholder="Ex.: Cor"
+                            >
+                        </div>
+
+                        <div class="campo">
+                            <label for="opcoesAtributo">
+                                Opções do atributo
+                            </label>
+                            <input
+                                type="text"
+                                id="opcoesAtributo"
+                                placeholder="Ex.: Azul, Rosa, Preto"
+                            >
+                            <small>
+                                Separe as opções por vírgulas.
+                            </small>
+                        </div>
+
+                        <div class="acoes-atributo">
+                            <button
+                                type="button"
+                                class="btn-adicionar-atributo"
+                                id="btnAdicionarAtributo"
+                            >
+                                Adicionar atributo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Os atributos serão enviados ao Flask neste campo -->
+                    <input
+                        type="hidden"
+                        name="atributosJson"
+                        id="atributosJson"
+                        value="[]"
+                    >
+
+                </div>
+            </section>
+
+            <!-- ETAPA 3: IMAGENS -->
+            <section
+                class="etapa-formulario"
+                id="etapa3"
+                hidden
+            >
+                <div class="formulario-card">
+
+                    <div class="titulo-modal">
+                        <h3>Imagens do Produto</h3>
+                        <p>
+                            Adicione as fotos que serão exibidas na sua loja.
+                        </p>
+                    </div>
+
+                    <div class="campo">
+                        <label for="imagensProduto">
+                            Selecionar imagens
+                        </label>
+                        <input
+                            type="file"
+                            id="imagensProduto"
+                            name="imagensProduto"
+                            accept="image/png,image/jpeg,image/webp"
+                            multiple
+                        >
+                        <small>
+                            Você poderá selecionar mais de uma imagem.
+                        </small>
+                    </div>
+
+                    <div
+                        class="lista-imagens"
+                        id="listaImagens"
+                    ></div>
+
+                </div>
+            </section>
+
+            <!-- Navegação: sem botão Cancelar -->
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn-voltar"
+                    id="btnVoltar"
+                    hidden
+                >
+                    ‹ Voltar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-proximo"
+                    id="btnProximo"
+                >
+                    Próximo
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-salvar-produto"
+                    id="btnSalvar"
+                    hidden
+                >
+                    Salvar Produto
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>

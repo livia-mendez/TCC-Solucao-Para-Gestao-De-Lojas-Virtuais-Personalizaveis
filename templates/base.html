@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EasyStore{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS específico de cada página -->
+    {% block css %}
+    {% endblock %}
+    
+</head>
+
+<body>
+
+    
+    <!-- MENU LATERAL -->
+    <aside id="menu-lateral">
+        
+        <!-- LOGO DA EMPRESA NO MENU -->
+        <img id="logo-menu" >
+
+        <div id="links-menu">
+
+            <a href="/templates/home.html">
+                <i class="fas fa-house"></i>
+                <span>Home</span>
+            </a>
+
+            <a href="/templates/produtos.html">
+                <i class="fas fa-box"></i>
+                <span>Produtos</span>
+            </a>
+
+            <a href="/templates/pedidos.html">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Pedidos</span>
+            </a>
+
+            <a href="/templates/personalizar_loja.html">
+                <i class="fas fa-palette"></i>
+                <span>Personalizar</span>
+            </a>
+
+            <a href="/templates/base.html">
+                <i class="fas fa-layer-group"></i>
+                <span>Categorias</span>
+            </a>
+
+            <a href="/templates/visualizar_loja.html">
+                <i class="fas fa-store"></i>
+                <span>Visualizar</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- CABEÇALHO -->
+    <!-- CABEÇALHO -->
+    <header id="cabecalho">
+
+        <nav class="navbar">
+
+            <!-- CAMPO DE PESQUISA -->
+            <div class="campo-pesquisa">
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="search"
+                    id="pesquisa"
+                    placeholder="Buscar no painel..."
+                    aria-label="Buscar no painel"
+                >
+            </div>
+
+            <!-- AÇÕES DO CABEÇALHO -->
+            <div class="acoes">
+
+                <!-- Notificações -->
+                <a
+                    href="/templates/pedidos.html"
+                    class="icone-header"
+                    aria-label="Notificações"
+                >
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </a>
+
+                <!-- Configurações -->
+                <a
+                    href="/templates/configuracoes_loja.html"
+                    class="icone-header"
+                    aria-label="Configurações"
+                >
+                    <i class="fas fa-cog"></i>
+                </a>
+
+                <!-- Ajuda -->
+                <a
+                    href="#"
+                    class="icone-header"
+                    aria-label="Ajuda"
+                >
+                    <i class="fas fa-circle-question"></i>
+                </a>
+
+                <!-- Sair -->
+                <a
+                    href="/templates/"
+                    class="icone-header"
+                    aria-label="Sair"
+                >
+                    <i class="fas fa-right-from-bracket"></i>
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- ÁREA PRINCIPAL -->
+    <div class="layout">
+
+        <main id="conteudo">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>
+            © 2026 EasyStore. Todos os direitos reservados.
+        </p>
+    </footer>
+</body>
+</html>

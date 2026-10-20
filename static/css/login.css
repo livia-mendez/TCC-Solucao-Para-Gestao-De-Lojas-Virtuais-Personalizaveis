@@ -1,0 +1,449 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #ECCCFA;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container-principal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    min-height: 600px;
+    background-color: #FFFFFF;
+    border-radius: 50px;
+}
+
+.menu {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+#menu-esquerdo {
+    background-color: #d6b6e1;
+    color: #FFFFFF;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#menu-direito {
+    background-color: #FFFFFF;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.campo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5px;
+}
+
+#login-form {
+    display: flex;
+    margin-top: 30px;
+}
+
+label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+input {
+    border-radius: 6px; 
+    height: 34px;
+    padding-left: 15px;
+    border: 1px solid #c1b3c7;
+}
+
+input::placeholder {
+    color: #b8b4b4;
+    font-size: 13px;
+}
+
+#upload {
+    border: none
+}
+
+.logo-container {
+    display: flex;
+    width: 100%;
+}
+
+#preview {
+    width: 25%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    border:#a070ad dashed 1px;
+    overflow: hidden;
+}
+
+.logo-content {
+    width: 50%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+#preview-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.logo-label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.upload-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    background: #dbbfe0;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+span {
+    font-size: 12px;
+}
+
+#text-add-logo {
+    font-size: 12px;
+    font-weight: 500;
+    color: #bdb5be;
+    white-space: nowrap;
+}
+
+.upload-button:hover {
+    background: #707584;
+}
+
+.upload-button img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.logo-content p {
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+}
+
+button {
+    background-color: #972BB2;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    height: 34px;
+    cursor: pointer;
+}
+
+#conta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.lembrar-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;   
+    margin-top: 3px;
+}
+
+#lembrar {
+    width: 18px;
+    height: 18px;
+    accent-color: #972BB2;
+}
+
+#lembrar-label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#login-button {
+    margin-top: 13px;
+    height: 40px;
+    border-radius: 6px;
+}
+
+a {
+    color: #972BB2;
+    font-weight: 600;
+}
+
+.divisor {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #666;
+    font-weight: 500;
+}
+
+.divisor::before,
+.divisor::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc; 
+    font-weight: 500;
+}
+
+.divisor span {
+    padding: 0 10px;
+}
+
+#criar-conta {
+    background-color: transparent; 
+    border: 1.5px solid #972BB2;
+    color: #972BB2;   
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#criar-conta:hover {
+    background-color: #7b2292; 
+}
+
+
+/* =========================================================
+   AJUSTES DA TELA DE LOGIN
+   ========================================================= */
+
+#titulo-login {
+    padding-top: 20px;
+}
+
+
+.conteudo-login {
+    width: 100%;
+    max-width: 400px;
+}
+
+
+/* Título do login */
+
+.conteudo-login > h1 {
+    margin-bottom: 8px;
+}
+
+
+/* Descrição do login */
+
+.descricao-login {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* Formulário do login */
+
+#menu-direito:has(.conteudo-login) #login-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0;
+
+    margin-top: 30px;
+}
+
+
+/* Campos do login */
+
+#menu-direito:has(.conteudo-login) #login-form .campo-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-bottom: 18px;
+}
+
+
+/* Inputs exclusivamente do login */
+
+#menu-direito:has(.conteudo-login) #login-form input[type="email"],
+#menu-direito:has(.conteudo-login) #login-form input[type="password"] {
+    width: 100%;
+    height: 40px;
+
+    padding-left: 15px;
+
+    border-radius: 6px;
+    border: 1px solid #c1b3c7;
+}
+
+
+/* Área lembrar usuário */
+
+#menu-direito:has(.conteudo-login) .lembrar-container {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: -3px;
+    margin-bottom: 18px;
+}
+
+
+/* Checkbox */
+
+#menu-direito:has(.conteudo-login) #lembrar {
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+
+    accent-color: #972BB2;
+}
+
+
+/* Texto do checkbox */
+
+#menu-direito:has(.conteudo-login) #lembrar-label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* Botão de login */
+
+#menu-direito:has(.conteudo-login) #login-button {
+    width: 100%;
+    height: 40px;
+
+    margin-top: 0;
+    margin-bottom: 16px;
+
+    background-color: #972BB2;
+    color: #FFFFFF;
+}
+
+
+/* Hover do botão login */
+
+#menu-direito:has(.conteudo-login) #login-button:hover {
+    background-color: #7b2292;
+}
+
+
+/* Recuperar senha */
+
+#menu-direito:has(.conteudo-login) #conta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 4px;
+
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* Divisor */
+
+#menu-direito:has(.conteudo-login) .divisor {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    margin: 24px 0;
+
+    color: #666;
+}
+
+
+/* Criar conta */
+
+#menu-direito:has(.conteudo-login) #criar-conta {
+    width: 100%;
+    height: 40px;
+
+    margin: 0;
+
+    background-color: transparent;
+
+    border: 1.5px solid #972BB2;
+
+    color: #972BB2;
+}
+
+
+/* Hover criar conta */
+
+#menu-direito:has(.conteudo-login) #criar-conta:hover {
+    background-color: #972BB2;
+    color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .card {
+        width: 95%;
+        flex-direction: column;
+    }
+
+    #menu-esquerdo {
+        min-height: 150px;
+    }
+
+    #menu-direito {
+        padding: 2rem;
+    }
+
+    .conteudo-login {
+        max-width: 100%;
+    }
+
+}

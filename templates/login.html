@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+
+<body>
+
+    <main class="container-principal">
+
+        <div class="card">
+
+            <!-- Lado esquerdo -->
+            <section class="menu" id="menu-esquerdo">
+                <h1>EasyStore</h1>
+            </section>
+
+            <!-- Lado direito -->
+            <section class="menu" id="menu-direito">
+
+                <div class="conteudo-login">
+
+                    <h1 id="titulo-login">Login</h1>
+
+                    <p class="descricao">
+                        Acesse sua conta para gerenciar sua loja virtual
+                    </p>
+
+                    <form action="/login" method="post" id="login-form">
+
+                        <!-- Email -->
+                        <div class="campo-form">
+                            <label for="email">Email *</label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="empresa@gmail.com"
+                                required>
+                        </div>
+
+                        <!-- Senha -->
+                        <div class="campo-form">
+                            <label for="senha">Senha *</label>
+
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="Digite sua senha"
+                                required>
+                        </div>
+
+                        <!-- Lembrar usuário -->
+                        <div class="lembrar-container">
+
+                            <input
+                                type="checkbox"
+                                id="lembrar"
+                                name="lembrar">
+
+                            <label for="lembrar" id="lembrar-label">
+                                Lembrar Usuário
+                            </label>
+
+                        </div>
+
+                        <!-- Login -->
+                        <button
+                            type="submit"
+                            id="login-button">
+                            Login
+                        </button>
+
+                        <!-- Recuperar senha -->
+                        <p id="conta">
+                            Esqueceu sua senha?
+                            <a href="/login">Recuperar Senha</a>
+                        </p>
+
+                        <!-- Divisor -->
+                        <div class="divisor">
+                            <span>ou</span>
+                        </div>
+
+                        <!-- Criar conta -->
+                        <button
+                            type="button"
+                            id="criar-conta"
+                            onclick="window.location.href='/cadastro'">
+                            Criar nova conta
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

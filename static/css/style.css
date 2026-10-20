@@ -1,0 +1,403 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+/* =========================================
+   MENU LATERAL
+========================================= */
+
+#menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 215px;
+    height: 100vh;
+
+    background-color: #972BB2;
+    padding: 20px 12px;
+
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* Área da logo */
+
+#area-logo {
+    width: 100%;
+    height: 65px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 28px;
+}
+
+#logo-menu {
+    display: block;
+    max-width: 145px;
+    max-height: 55px;
+    object-fit: contain;
+}
+
+/* Organização dos links */
+
+#links-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Cada link */
+
+#links-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    min-height: 43px;
+
+    padding: 0 17px;
+
+    color: #FFFFFF;
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    font-weight: 500;
+    font-size: 14px;
+
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Ícones do menu */
+
+#links-menu a i {
+    width: 19px;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 15px;
+}
+
+/* Efeito ao passar o mouse */
+
+#links-menu a:hover {
+    background-color: #D6B6E1;
+    color: #7024A3;
+}
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+#cabecalho {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-left: 215px;
+    width: calc(100% - 215px);
+    height: 68px;
+    z-index: 900;
+}
+
+/* =========================================
+   BARRA DO CABEÇALHO
+========================================= */
+
+.navbar {
+    width: 100%;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 35px;
+    background-color: rgb(238, 230, 237);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================
+   CAMPO DE PESQUISA
+========================================= */
+
+.campo-pesquisa {
+    width: 43%;
+    max-width: 440px;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 13px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(101, 100, 100, 0.16);
+    transition: box-shadow 0.2s ease;
+}
+
+/* Campo de pesquisa quando selecionado */
+
+.campo-pesquisa:focus-within {
+    box-shadow: 0 0 0 2px rgba(151, 43, 178, 0.15);
+}
+
+/* Ícone da pesquisa */
+
+.campo-pesquisa i {
+    flex-shrink: 0;
+    color: #972bb2;
+    font-size: 15px;
+}
+
+/* Input */
+
+#pesquisa {
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #333333;
+    font-size: 12px;
+}
+
+#pesquisa::placeholder {
+    color: #888888;
+}
+
+
+/* =========================================
+   AÇÕES DO CABEÇALHO
+========================================= */
+
+.acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 22px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Ícones */
+
+.icone-header {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7024a3;
+    text-decoration: none;
+    font-size: 19px;
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.icone-header:hover {
+    color: #972bb2;
+    transform: scale(1.06);
+}
+
+
+/* =========================================
+   BADGE DE NOTIFICAÇÃO
+========================================= */
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #e83e8c;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+/* =========================================
+   ÁREA PRINCIPAL
+========================================= */
+
+.layout {
+    margin-left: 215px;
+    width: calc(100% - 215px);
+    min-height: calc(100vh - 68px);
+    padding-top: 68px;
+    display: flex;
+}
+
+#conteudo {
+    width: 100%;
+    min-width: 0;
+    padding: 24px;
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+footer {
+    margin-left: 215px;
+    width: calc(100% - 215px);
+    padding: 14px 20px;
+    background-color: rgb(238, 230, 237);
+    text-align: center;
+    margin-top: auto;
+}
+
+footer p {
+    font-size: 11px;
+    color: #666666;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    #cabecalho {
+        margin-left: 215px;
+        width: calc(100% - 215px);
+    }
+
+    .navbar {
+        padding: 14px 20px;
+        gap: 16px;
+    }
+
+    .campo-pesquisa {
+        width: 45%;
+    }
+
+    .acoes {
+        gap: 16px;
+    }
+
+    #conteudo {
+        padding: 20px;
+    }
+}
+
+/* =========================================
+   CELULAR
+========================================= */
+
+@media (max-width: 600px) {
+
+    #menu-lateral {
+        width: 65px;
+        padding: 18px 8px;
+    }
+
+    #area-logo {
+        height: 45px;
+        margin-bottom: 20px;
+    }
+
+    #logo-menu {
+        max-width: 45px;
+        max-height: 40px;
+    }
+
+    #links-menu a {
+        justify-content: center;
+        padding: 0;
+        min-height: 42px;
+    }
+
+    #links-menu a span {
+        display: none;
+    }
+
+    #links-menu a i {
+        width: auto;
+        font-size: 17px;
+    }
+
+    /* Cabeçalho no celular */
+
+    #cabecalho {
+        margin-left: 65px;
+        width: calc(100% - 65px);
+        height: auto;
+    }
+
+    .navbar {
+        height: auto;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    /* Pesquisa */
+
+    .campo-pesquisa {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+    }
+
+    /* Ícones */
+
+    .acoes {
+        width: 100%;
+        justify-content: space-around;
+        gap: 12px;
+        margin-left: 0;
+    }
+
+
+    /* Conteúdo */
+
+    .layout {
+        margin-left: 65px;
+        width: calc(100% - 65px);
+        padding-top: 112px;
+    }
+
+    #conteudo {
+        padding: 14px;
+    }
+
+
+    /* Rodapé */
+
+    footer {
+        margin-left: 65px;
+        width: calc(100% - 65px);
+        padding: 12px 6px;
+    }
+
+    footer p {
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,285 @@
+
+/* ========================================
+   ETAPAS DO CADASTRO
+======================================== */
+
+.etapa-formulario[hidden],
+.form-atributo[hidden],
+.modal-footer button[hidden] {
+    display: none !important;
+}
+
+.etapa-formulario.ativa {
+    display: block;
+}
+
+.modal-produto {
+    width: 100%;
+    max-width: 480px;
+    max-height: 92vh;
+    overflow-y: auto;
+}
+
+.formulario-card {
+    margin: 0 24px;
+    padding: 18px;
+    background: #fcf8fe;
+    border-radius: 11px;
+    box-shadow: 0 2px 3px rgba(75, 25, 90, 0.15);
+}
+
+.titulo-modal {
+    margin-bottom: 16px;
+}
+
+.titulo-modal h3 {
+    margin: 0;
+    color: #30205e;
+    font-size: 15px;
+}
+
+.titulo-modal p {
+    margin: 5px 0 0;
+    color: #88808c;
+    font-size: 11px;
+}
+
+/* ========================================
+   INDICADOR DE PROGRESSO
+======================================== */
+
+.indicador-etapas {
+    position: relative;
+    height: 24px;
+    margin: 8px 26px 12px;
+}
+
+.linha-etapas {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 6px;
+    transform: translateY(-50%);
+    border-radius: 10px;
+    background: #982bb2;
+}
+
+.etapa-atual {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 4px #0002;
+    transition: left 0.25s ease;
+}
+
+/* ========================================
+   FORMULÁRIO DE ATRIBUTO
+======================================== */
+
+.btn-novo-atributo,
+.btn-adicionar-atributo {
+    min-height: 34px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #982bb2;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-novo-atributo {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.form-atributo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 14px;
+    border: 1px solid #e4c9ed;
+    border-radius: 8px;
+    background: #f7edfb;
+    animation: abrirAtributo 0.2s ease;
+}
+
+.form-atributo h4 {
+    margin: 0;
+    color: #630386;
+    font-size: 13px;
+}
+
+.form-atributo .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-atributo .campo label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #4b2a91;
+}
+
+.form-atributo input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 10px;
+    border: 1px solid #ddd0e5;
+    border-radius: 6px;
+    background: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+}
+
+.form-atributo small,
+.campo small {
+    color: #88808c;
+    font-size: 10px;
+}
+
+.acoes-atributo {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@keyframes abrirAtributo {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   ATRIBUTOS CADASTRADOS
+======================================== */
+
+.lista-atributos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-atributo {
+    padding: 10px;
+    border: 1px solid #e4c9ed;
+    border-radius: 7px;
+    background: #f7edfb;
+}
+
+.item-atributo strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #630386;
+    font-size: 12px;
+}
+
+.opcoes-atributo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.opcao-atributo {
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: #ead5f2;
+    color: #630386;
+    font-size: 10px;
+}
+
+.mensagem-vazia {
+    color: #88808c;
+    font-size: 11px;
+}
+
+/* ========================================
+   IMAGENS
+======================================== */
+
+.lista-imagens {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.lista-imagens img {
+    width: 100%;
+    height: 85px;
+    object-fit: cover;
+    border: 1px solid #e4c9ed;
+    border-radius: 6px;
+}
+
+/* ========================================
+   RODAPÉ
+======================================== */
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 14px 24px 18px;
+}
+
+.modal-footer button {
+    min-height: 34px;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-voltar {
+    background: #f0d9f7;
+    color: #982bb2;
+}
+
+.btn-proximo,
+.btn-salvar-produto {
+    margin-left: auto;
+    background: #982bb2;
+    color: #ffffff;
+}
+
+.btn-voltar:hover {
+    background: #e4c3f0;
+}
+
+.btn-proximo:hover,
+.btn-salvar-produto:hover {
+    background: #7e2097;
+}
+
+@media (max-width: 480px) {
+    .formulario-card {
+        margin: 0 12px;
+        padding: 14px;
+    }
+
+    .modal-footer {
+        margin-right: 12px;
+        margin-left: 12px;
+    }
+}
+    

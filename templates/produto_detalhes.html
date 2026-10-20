@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Detalhes Produto - EasyStore
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/produto_detalhes.css">
+{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="inicio-pagina">
+            <a href="/produtos.html" class="botao-voltar"><i>&larr;</i> Voltar</a>
+        </div>
+        <div class="acoes">
+            <button type="button" class="btn-edit" onclick="abrirModalEdicao(1)"><i class="fas fa-edit"></i> Editar</button>
+            <button type="button" class="btn-excluir" onclick="deletarItem(1)"><i class="fas fa-trash-alt"></i> Excluir</button>
+        </div>
+    </header>
+
+    <body>
+        <div class="container">
+            <div class="img-produtos">
+                <img>
+                <img>
+            </div> 
+
+            <div class="info-produto">
+                <div class="info-header">
+                    <h2>Nome Produto</h2>
+                    <h3>R$ 39,99</h3>
+                </div>
+
+                <div class="cores">
+                    <h4>CORES DISPONÍVEIS</h4>
+                    <div class="circulo-cores"></div>
+                </div>
+
+                <div class="tamanhos">
+                    <h4>TAMANHOS</h4>
+                    <div class="guia-tamanhos"></div>
+                </div>
+
+                <div class="descricao">
+                    <h4>DESCRIÇÃO</h4>
+                    <p>Camiseta Masculina,  fabricada com um tecido premium, 70% linho e 30% algodão com várias cores e tamanhos disponíveis disponíveis. Fabricada com tecido importado.</p>
+                </div>
+
+                <button class="btn-add-carrinho"><i class="fa-solid fa-cart-shopping"></i>Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </body>
+
+
+{% endblock %}
