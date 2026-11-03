@@ -91,6 +91,13 @@ body {
 /* =========================================
    CARD DE PRODUTOS
 ========================================= */
+
+.link-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .card-produtos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -115,18 +122,18 @@ body {
     cursor: pointer;
 }
 
-.cards:hover {
-    background-color: #630386;
-    transform: scale(1.05);
-}
-
-.cards > img {
+.cards img {                 
     width: 100%;
     height: 150px;
     object-fit: contain;
     background: #f8f6ff;
     border-radius: 9px;
     margin-bottom: 8px;
+}
+
+.cards:hover {               /* sem fundo roxo escuro */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(80, 40, 100, 0.18);
 }
 
 /* NOME E PREÇO */

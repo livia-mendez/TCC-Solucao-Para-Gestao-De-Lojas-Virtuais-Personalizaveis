@@ -1,4 +1,3 @@
-
 <div
     class="modal"
     id="modalProduto"
@@ -7,11 +6,11 @@
     aria-labelledby="tituloModalProduto"
 >
     <div class="modal-produto">
-
-        <!-- Cabeçalho -->
-        <div class="modal-header">
+ 
+        <!-- CABEÇALHO -->
+        <header class="modal-header">
             <h2 id="tituloModalProduto">Adicionar Produto</h2>
-
+ 
             <button
                 type="button"
                 class="btn-fechar-modal"
@@ -20,58 +19,79 @@
             >
                 &times;
             </button>
-        </div>
-
-        <!-- Indicador de etapas -->
-        <div class="indicador-etapas">
+        </header>
+ 
+        <!-- INDICADOR DE ETAPAS -->
+        <div
+            class="indicador-etapas"
+            aria-label="Progresso do cadastro"
+        >
             <div class="linha-etapas"></div>
             <span class="etapa-atual" id="etapaAtual"></span>
         </div>
-
+ 
+        <!-- FORMULÁRIO PRINCIPAL -->
         <form
             action="{{ url_for('cadastrar_produto') }}"
             method="POST"
+            enctype="multipart/form-data"
             id="formProduto"
+            novalidate
         >
-
-            <!-- ETAPA 1: INFORMAÇÕES BÁSICAS -->
-            <section class="etapa-formulario ativa" id="etapa1">
-
+ 
+            <!-- ==================================
+                 ETAPA 1: INFORMAÇÕES BÁSICAS
+            =================================== -->
+            <section
+                class="etapa-formulario ativa"
+                id="etapa1"
+            >
                 <div class="formulario-card">
+ 
                     <div class="titulo-modal">
                         <h3>Informações Básicas</h3>
                         <p>Preencha as informações do produto.</p>
                     </div>
-
+ 
                     <div class="form-grid">
-
+ 
+                        <!-- COLUNA ESQUERDA -->
                         <div class="coluna-esquerda">
-
+ 
                             <div class="campo">
-                                <label for="nome">Nome: *</label>
+                                <label for="nome">
+                                    Nome <span class="obrigatorio">*</span>
+                                </label>
+ 
                                 <input
                                     type="text"
                                     id="nome"
                                     name="nome"
+                                    placeholder="Nome do produto"
                                     maxlength="150"
                                     required
                                 >
                             </div>
-
-                            <div class="campo">
-                                <label for="descricao">Descrição: *</label>
+ 
+                            <div class="campo campo-descricao">
+                                <label for="descricao">
+                                    Descrição
+                                    <span class="obrigatorio">*</span>
+                                </label>
+ 
                                 <textarea
                                     id="descricao"
                                     name="descricao"
+                                    placeholder="Descreva seu produto..."
                                     maxlength="1200"
                                     required
                                 ></textarea>
                             </div>
-
+ 
                             <div class="campo campo-variacoes">
                                 <label
-                                    class="checkbox-container"
                                     for="possuiVariacoes"
+                                    class="checkbox-container"
                                 >
                                     <input
                                         type="checkbox"
@@ -79,38 +99,52 @@
                                         name="possuiVariacoes"
                                         value="1"
                                     >
-                                    <span>Produto possui variações?</span>
+ 
+                                    <span>
+                                        Produto possui variações?
+                                    </span>
                                 </label>
                             </div>
-
+ 
                         </div>
-
+ 
+                        <!-- COLUNA DIREITA -->
                         <div class="coluna-direita">
-
+ 
                             <div class="campo" id="campoValor">
-                                <label for="valorBase">Valor base: *</label>
+                                <label for="valorBase">
+                                    Valor Base
+                                    <span class="obrigatorio">*</span>
+                                </label>
+ 
                                 <div class="input-prefixo">
-                                    <span>R$</span>
                                     <input
                                         type="text"
                                         id="valorBase"
                                         name="valorBase"
-                                        inputmode="decimal"
-                                        placeholder="0,00"
+                                        placeholder="R$ 0,00"
+                                        inputmode="numeric"
+                                        autocomplete="off"
                                         required
                                     >
                                 </div>
                             </div>
-
-                            <div class="campo">
-                                <label for="idCategoria">Categoria: *</label>
+ 
+                            <div class="campo campo-categoria">
+                                <label for="idCategoria">
+                                    Categoria
+                                    <span class="obrigatorio">*</span>
+                                </label>
+ 
                                 <select
                                     id="idCategoria"
                                     name="idCategoria"
-                                    required
+                                    
                                 >
-                                    <option value="">Selecione</option>
-
+                                    <option value="">
+                                        Selecione uma categoria
+                                    </option>
+ 
                                     {% for categoria in categorias %}
                                         <option
                                             value="{{ categoria.idCategoria }}"
@@ -119,21 +153,36 @@
                                         </option>
                                     {% endfor %}
                                 </select>
+ 
+                                {% if not categorias %}
+                                    <small class="aviso-categoria">
+                                        Você ainda não possui categorias cadastradas.
+                                    </small>
+                                {% endif %}
                             </div>
-
+ 
                             <div class="campo">
-                                <label for="codigoSKU">Código SKU: *</label>
+                                <label for="codigoSKU">
+                                    Código SKU
+                                    <span class="obrigatorio">*</span>
+                                </label>
+ 
                                 <input
                                     type="text"
                                     id="codigoSKU"
                                     name="codigoSKU"
+                                    placeholder="Ex.: CAM-001"
                                     maxlength="50"
                                     required
                                 >
                             </div>
-
+ 
                             <div class="campo" id="campoEstoque">
-                                <label for="estoque">Estoque: *</label>
+                                <label for="estoque">
+                                    Estoque
+                                    <span class="obrigatorio">*</span>
+                                </label>
+ 
                                 <input
                                     type="number"
                                     id="estoque"
@@ -144,149 +193,313 @@
                                     required
                                 >
                             </div>
-
+ 
                         </div>
+ 
                     </div>
                 </div>
-
             </section>
-
-            <!-- ETAPA 2: ATRIBUTOS E VARIAÇÕES -->
+ 
+ 
+            <!-- ==================================
+                 ETAPA 2: ATRIBUTOS E VARIAÇÕES
+            =================================== -->
             <section
                 class="etapa-formulario"
                 id="etapa2"
                 hidden
             >
                 <div class="formulario-card">
-
+ 
                     <div class="titulo-modal">
-                        <h3>Atributos e Variações</h3>
-                        <p>
-                            Defina as características e opções do produto.
-                        </p>
+                        <h3>Atributos e Variações:</h3>
+                        <p>Edite as variações do produto, caso seja aplicável</p>
                     </div>
-
-                    <!-- Atributos já adicionados -->
-                    <div id="listaAtributos">
-                        <p class="mensagem-vazia" id="mensagemAtributos">
-                            Nenhum atributo adicionado.
-                        </p>
-                    </div>
-
-                    <button
-                        type="button"
-                        class="btn-novo-atributo"
-                        id="btnNovoAtributo"
-                    >
-                        + Novo atributo
-                    </button>
-
-                    <!-- Formulário expansível de atributo -->
-                    <div
-                        class="form-atributo"
-                        id="formAtributo"
-                        hidden
-                    >
-                        <h4>Novo atributo</h4>
-
-                        <div class="campo">
-                            <label for="nomeAtributo">
-                                Nome do atributo
-                            </label>
-                            <input
-                                type="text"
-                                id="nomeAtributo"
-                                placeholder="Ex.: Cor"
-                            >
+ 
+                    <!-- AVISO: PRODUTO SEM VARIAÇÕES -->
+                    <p class="aviso-variacoes" id="avisoSemVariacoes" hidden>
+                        Este produto não possui variações. Clique em
+                        "Próximo" para continuar ou volte e marque
+                        "Produto possui variações?".
+                    </p>
+ 
+                    <div id="conteudoVariacoes">
+ 
+                        <!-- TABELA DE VARIAÇÕES (colunas montadas pelo JS) -->
+                        <div class="tabela-variacoes-container">
+                            <table class="tabela-variacoes">
+                                <thead>
+                                    <tr id="cabecalhoVariacoes"></tr>
+                                </thead>
+ 
+                                <tbody id="listaVariacoes"></tbody>
+                            </table>
+ 
+                            <div class="acoes-variacoes">
+                                <button
+                                    type="button"
+                                    class="btn-adicionar-variacao"
+                                    id="btnAdicionarVariacao"
+                                >
+                                    + Adicionar Variação
+                                </button>
+ 
+                                <button
+                                    type="button"
+                                    class="btn-adicionar-variacao btn-gerar-variacoes"
+                                    id="btnGerarVariacoes"
+                                >
+                                    Gerar todas as combinações
+                                </button>
+                            </div>
                         </div>
-
-                        <div class="campo">
-                            <label for="opcoesAtributo">
-                                Opções do atributo
-                            </label>
-                            <input
-                                type="text"
-                                id="opcoesAtributo"
-                                placeholder="Ex.: Azul, Rosa, Preto"
+ 
+                        <!-- ATRIBUTOS DO PRODUTO -->
+                        <div class="secao-atributos">
+                            <h4>Atributos do Produto:</h4>
+ 
+                            <div
+                                class="lista-atributos"
+                                id="listaAtributos"
                             >
-                            <small>
-                                Separe as opções por vírgulas.
-                            </small>
-                        </div>
-
-                        <div class="acoes-atributo">
+                                <p
+                                    class="mensagem-vazia"
+                                    id="mensagemAtributos"
+                                >
+                                    Nenhum atributo adicionado.
+                                </p>
+                            </div>
+ 
                             <button
                                 type="button"
-                                class="btn-adicionar-atributo"
-                                id="btnAdicionarAtributo"
+                                class="btn-novo-atributo"
+                                id="btnNovoAtributo"
                             >
-                                Adicionar atributo
+                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                Novo
                             </button>
                         </div>
+ 
+                        <!-- FORMULÁRIO PARA ADICIONAR ATRIBUTO -->
+                        <div
+                            class="form-atributo"
+                            id="formAtributo"
+                            hidden
+                        >
+                            <h4>Adicionar atributo</h4>
+ 
+                            <div class="campo">
+                                <label for="nomeAtributo">Nome do atributo</label>
+ 
+                                <input
+                                    type="text"
+                                    id="nomeAtributo"
+                                    placeholder="Ex.: Cor"
+                                    maxlength="50"
+                                    autocomplete="off"
+                                >
+                            </div>
+ 
+                            <div class="campo">
+                                <label for="opcoesAtributo">Opções do atributo</label>
+ 
+                                <input
+                                    type="text"
+                                    id="opcoesAtributo"
+                                    placeholder="Ex.: Azul, Rosa, Preto"
+                                    autocomplete="off"
+                                >
+ 
+                                <small>Separe as opções por vírgulas.</small>
+                            </div>
+ 
+                            <div class="acoes-atributo">
+                                <button
+                                    type="button"
+                                    class="btn-cancelar-atributo"
+                                    id="btnCancelarAtributo"
+                                >
+                                    Fechar
+                                </button>
+ 
+                                <button
+                                    type="button"
+                                    class="btn-adicionar-atributo"
+                                    id="btnAdicionarAtributo"
+                                >
+                                    Adicionar
+                                </button>
+                            </div>
+                        </div>
+ 
                     </div>
-
-                    <!-- Os atributos serão enviados ao Flask neste campo -->
+ 
+                    <!-- MENSAGEM DE ERRO DA ETAPA -->
+                    <p
+                        class="mensagem-erro"
+                        id="erroEtapa2"
+                        role="alert"
+                        hidden
+                    ></p>
+ 
+                    <!-- DADOS ENVIADOS AO FLASK -->
                     <input
                         type="hidden"
                         name="atributosJson"
                         id="atributosJson"
                         value="[]"
                     >
-
+ 
+                    <input
+                        type="hidden"
+                        name="variacoesJson"
+                        id="variacoesJson"
+                        value="[]"
+                    >
+ 
                 </div>
             </section>
-
-            <!-- ETAPA 3: IMAGENS -->
+ 
+ 
+            <!-- ==================================
+                 ETAPA 3: IMAGENS
+            =================================== -->
             <section
                 class="etapa-formulario"
                 id="etapa3"
                 hidden
             >
                 <div class="formulario-card">
-
+ 
                     <div class="titulo-modal">
-                        <h3>Imagens do Produto</h3>
+                        <h3>Editar Imagens</h3>
                         <p>
-                            Adicione as fotos que serão exibidas na sua loja.
+                            Adicione e edite as imagens.
                         </p>
                     </div>
-
-                    <div class="campo">
-                        <label for="imagensProduto">
-                            Selecionar imagens
-                        </label>
-                        <input
-                            type="file"
-                            id="imagensProduto"
-                            name="imagensProduto"
-                            accept="image/png,image/jpeg,image/webp"
-                            multiple
-                        >
+ 
+                    <!-- SELETORES: VARIAÇÃO E COR DE FUNDO -->
+                    <div class="linha-seletores-imagem">
+ 
+                        <div class="seletor-com-cor sem-amostra">
+                            <span
+                                class="amostra-cor"
+                                id="amostraVariacao"
+                                aria-hidden="true"
+                            ></span>
+ 
+                            <select
+                                id="selecionarVariacaoImagem"
+                                aria-label="Selecione a variação"
+                            ></select>
+                        </div>
+ 
+                        <div class="seletor-com-cor sem-amostra">
+                            <span
+                                class="amostra-cor"
+                                id="amostraFundo"
+                                aria-hidden="true"
+                            ></span>
+ 
+                            <select
+                                id="corFundoImagem"
+                                aria-label="Selecione a cor de fundo"
+                            >
+                                <option value="">Selecione a Cor de Fundo</option>
+                                <option value="#ffffff">Branco</option>
+                                <option value="#f2f2f2">Cinza claro</option>
+                                <option value="#d9d9d9">Cinza</option>
+                                <option value="#f0e3f6">Lilás claro</option>
+                                <option value="#fde2ea">Rosa claro</option>
+                                <option value="#dbeafe">Azul claro</option>
+                                <option value="#f3ead9">Bege</option>
+                                <option value="#1f1f1f">Preto</option>
+                            </select>
+                        </div>
+ 
+                    </div>
+ 
+                    <!-- ÁREA DE UPLOAD (clique ou arraste) -->
+                    <div
+                        class="area-upload"
+                        id="areaUpload"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Adicionar imagens"
+                    >
+                        <i class="far fa-image" aria-hidden="true"></i>
+ 
+                        <strong>
+                            Arraste as imagens aqui ou clique para fazer upload
+                        </strong>
+ 
                         <small>
-                            Você poderá selecionar mais de uma imagem.
+                            Formatos permitidos: JPEG, PNG e WebP
+                            (até 8 imagens de 5 MB)
                         </small>
                     </div>
-
+ 
+                    <!-- Seletor de arquivos (sem name: não é enviado) -->
+                    <input
+                        type="file"
+                        id="entradaImagens"
+                        accept="image/png,image/jpeg,image/webp"
+                        multiple
+                        hidden
+                    >
+ 
+                    <small class="contador-imagens" id="contadorImagens"></small>
+ 
+                    <p
+                        class="mensagem-erro"
+                        id="erroImagens"
+                        role="alert"
+                        hidden
+                    ></p>
+ 
+                    <p class="mensagem-vazia" id="mensagemImagens">
+                        Nenhuma imagem adicionada.
+                    </p>
+ 
                     <div
                         class="lista-imagens"
                         id="listaImagens"
                     ></div>
-
+ 
+                    <!-- DADOS ENVIADOS AO FLASK -->
+                    <input
+                        type="file"
+                        id="imagensProduto"
+                        name="imagensProduto"
+                        multiple
+                        hidden
+                    >
+ 
+                    <input
+                        type="hidden"
+                        name="imagensJson"
+                        id="imagensJson"
+                        value="{}"
+                    >
+ 
                 </div>
             </section>
-
-            <!-- Navegação: sem botão Cancelar -->
-            <div class="modal-footer">
-
+ 
+            <!-- ==================================
+                 RODAPÉ: NAVEGAÇÃO
+            =================================== -->
+            <footer class="modal-footer">
+ 
                 <button
                     type="button"
                     class="btn-voltar"
                     id="btnVoltar"
                     hidden
                 >
-                    ‹ Voltar
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    Voltar
                 </button>
-
+ 
                 <button
                     type="button"
                     class="btn-proximo"
@@ -294,18 +507,29 @@
                 >
                     Próximo
                 </button>
-
+ 
+                <button
+                    type="button"
+                    class="btn-cancelar-produto"
+                    id="btnCancelar"
+                    hidden
+                >
+                    Cancelar
+                </button>
+ 
                 <button
                     type="submit"
                     class="btn-salvar-produto"
                     id="btnSalvar"
                     hidden
                 >
+                    <i class="fas fa-check" aria-hidden="true"></i>
                     Salvar Produto
                 </button>
-
-            </div>
-
+ 
+            </footer>
+ 
         </form>
     </div>
 </div>
+ 

@@ -5,59 +5,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}EasyStore{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
+    <!-- Cores padrão do sistema (usa as variáveis --cor-...) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tema.css') }}">
+
+    <!-- Cores salvas pela loja (vêm do banco; sobrescrevem as padrão) -->
+    {% if tema_css %}
+    <style>{{ tema_css|safe }}</style>
+    {% endif %}
+
     <!-- CSS específico de cada página -->
     {% block css %}
     {% endblock %}
-    
+
 </head>
 
 <body>
 
-    
     <!-- MENU LATERAL -->
     <aside id="menu-lateral">
-        
-        <!-- LOGO DA EMPRESA NO MENU -->
-        <img id="logo-menu" >
+
+        <!-- LOGO DA EMPRESA NO MENU (se a loja não enviou logo, mostra o nome) -->
+        <img id="logo-menu" alt="Logo da loja"
+             {% if tema_logo %}src="{{ tema_logo }}"{% else %}hidden{% endif %}>
+        <span id="nome-menu" class="nome-loja-menu"
+              {% if tema_logo %}hidden{% endif %}>{{ session.get('nomeLoja', 'EasyStore') }}</span>
 
         <div id="links-menu">
 
-            <a href="/templates/home.html">
+            <a href="{{ url_for('home') }}"
+               class="{{ 'ativo' if request.path == '/home' }}">
                 <i class="fas fa-house"></i>
                 <span>Home</span>
             </a>
 
-            <a href="/templates/produtos.html">
+            <a href="{{ url_for('produtos') }}"
+               class="{{ 'ativo' if request.path.startswith('/produto') }}">
                 <i class="fas fa-box"></i>
                 <span>Produtos</span>
             </a>
 
-            <a href="/templates/pedidos.html">
+            <a href="{{ url_for('pedidos') }}"
+               class="{{ 'ativo' if request.path.startswith('/pedidos') }}">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Pedidos</span>
             </a>
 
-            <a href="/templates/personalizar_loja.html">
+            <a href="{{ url_for('personalizacao') }}"
+               class="{{ 'ativo' if request.path == '/personalizacao' }}">
                 <i class="fas fa-palette"></i>
                 <span>Personalizar</span>
             </a>
 
-            <a href="/templates/base.html">
+            <a href="{{ url_for('categorias') }}"
+               class="{{ 'ativo' if request.path.startswith('/categorias') }}">
                 <i class="fas fa-layer-group"></i>
                 <span>Categorias</span>
             </a>
 
-            <a href="/templates/visualizar_loja.html">
+            <a href="{{ url_for('visualizacao') }}"
+               class="{{ 'ativo' if request.path == '/visualizacao' }}">
                 <i class="fas fa-store"></i>
                 <span>Visualizar</span>
             </a>
         </div>
     </aside>
 
-    <!-- CABEÇALHO -->
     <!-- CABEÇALHO -->
     <header id="cabecalho">
 
@@ -80,7 +95,7 @@
 
                 <!-- Notificações -->
                 <a
-                    href="/templates/pedidos.html"
+                    href="{{ url_for('pedidos') }}"
                     class="icone-header"
                     aria-label="Notificações"
                 >
@@ -90,7 +105,7 @@
 
                 <!-- Configurações -->
                 <a
-                    href="/templates/configuracoes_loja.html"
+                    href="{{ url_for('configuracoes_loja') }}"
                     class="icone-header"
                     aria-label="Configurações"
                 >
@@ -108,7 +123,7 @@
 
                 <!-- Sair -->
                 <a
-                    href="/templates/"
+                    href="{{ url_for('sair') }}"
                     class="icone-header"
                     aria-label="Sair"
                 >
@@ -136,5 +151,9 @@
             © 2026 EasyStore. Todos os direitos reservados.
         </p>
     </footer>
+
+    <!-- JavaScript específico de cada página -->
+    {% block js %}
+    {% endblock %}
 </body>
 </html>

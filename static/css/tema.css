@@ -1,0 +1,42 @@
+/* Liga as cores da personalização aos elementos do base.html.
+   Carregue DEPOIS do style.css. Os valores abaixo são o padrão;
+   as cores salvas da loja chegam pelo <style> do base.html. */
+:root {
+  --cor-principal: #972BB2;
+  --cor-caixas: #FAEFFD;
+  --cor-fundo: #ECCCFA;
+  --cor-menu-superior: #972BB2;
+  --cor-menu-lateral: #972BB2;
+  --cor-itens-lateral: #FFFFFF;
+  --cor-itens-superior: #FFFFFF;
+  --cor-busca: #F1E5FB;
+  --cor-texto: #000000;
+  --cor-icones: #FFFFFF;
+}
+ 
+body { background: var(--cor-fundo); color: var(--cor-texto); }
+ 
+/* Menu lateral */
+#menu-lateral { background: var(--cor-menu-lateral); }
+#menu-lateral a,
+#menu-lateral a i,
+#menu-lateral a span,
+.nome-loja-menu { color: var(--cor-itens-lateral); }
+#menu-lateral a.ativo { background: rgba(0, 0, 0, .25); }
+.nome-loja-menu { display: block; padding: 16px 24px; font-size: 1.1rem; font-weight: 600; }
+ 
+/* Menu superior */
+#cabecalho { background: var(--cor-menu-superior); color: var(--cor-itens-superior); }
+.campo-pesquisa,
+#pesquisa { background: var(--cor-busca); }
+.campo-pesquisa i,
+#pesquisa { color: var(--cor-texto); }
+.icone-header { color: var(--cor-icones); }
+ 
+/* Rodapé */
+footer { background: var(--cor-menu-superior); color: var(--cor-itens-superior); }
+ 
+/* O atributo hidden precisa vencer qualquer display do style.css */
+#logo-menu[hidden],
+#nome-menu[hidden] { display: none !important; }
+ 

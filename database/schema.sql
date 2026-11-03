@@ -43,6 +43,17 @@ CREATE TABLE IF NOT EXISTS Categoria (
         ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS Categoria (
+    idCategoria INT AUTO_INCREMENT PRIMARY KEY,
+    idLoja INT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    icone VARCHAR(30) NOT NULL DEFAULT 'shirt',
+    descricao VARCHAR(255),
+
+    FOREIGN KEY (idLoja)
+        REFERENCES Loja(idLoja)
+);
+
 -- -------------------------------------------------------------
 -- 3. CLIENTE
 -- -------------------------------------------------------------   

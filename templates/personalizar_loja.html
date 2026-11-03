@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+ 
+{% block title %}Personalizar Loja | EasyStore{% endblock %}
+ 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/personalizar_loja.css') }}">
+{% endblock %}
+ 
+{% block content %}
+<div id="pagina-personalizar">
+  <h1>Personalizar Loja</h1>
+  <p class="subtitulo">Ajuste as cores, logo e design da sua loja conforme suas preferências.</p>
+ 
+  <section class="sanfona aberta" id="sec-identidade">
+    <button class="sanfona-topo" type="button" aria-expanded="true" aria-controls="corpo-identidade">
+      Identidade Visual da Empresa <span class="seta" aria-hidden="true">⌃</span>
+    </button>
+    <div class="sanfona-corpo" id="corpo-identidade">
+      <div class="uploads">
+        <div class="upload-bloco">
+          <span class="upload-rotulo">Upload da Logo:</span>
+          <label class="dropzone" id="dropLogo">
+            <input type="file" id="inputLogo" accept=".jpg,.jpeg,.png" hidden>
+            <img class="preview" id="previewLogo" alt="Pré-visualização da logo" hidden>
+            <span class="dz-texto">Arraste a imagem aqui ou clique para fazer upload</span>
+            <span class="dz-formatos">Formatos permitidos: JPEG, PNG</span>
+          </label>
+        </div>
+        <div class="upload-bloco">
+          <span class="upload-rotulo">Banner:</span>
+          <label class="dropzone" id="dropBanner">
+            <input type="file" id="inputBanner" accept=".jpg,.jpeg,.png" hidden>
+            <img class="preview" id="previewBanner" alt="Pré-visualização do banner" hidden>
+            <span class="dz-texto">Arraste a imagem aqui ou clique para fazer upload</span>
+            <span class="dz-formatos">Formatos permitidos: JPEG, PNG</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <section class="sanfona" id="sec-cores">
+    <button class="sanfona-topo" type="button" aria-expanded="false" aria-controls="corpo-cores">
+      Cores do Sistema <span class="seta" aria-hidden="true">⌃</span>
+    </button>
+    <div class="sanfona-corpo" id="corpo-cores">
+      <div class="cores-grade">
+        <!-- data-chave: nome enviado ao Flask | data-var: variável CSS aplicada -->
+        <label class="cor-item"><span class="cor-nome">Cor Principal<small>Cor dos elementos principais</small></span>
+          <input type="color" data-chave="principal" data-var="--cor-principal" value="#972BB2"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor dos Itens do Menu Lateral<small>Configure a cor</small></span>
+          <input type="color" data-chave="itensMenuLateral" data-var="--cor-itens-lateral" value="#FFFFFF"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor das “Caixas”<small>Fundos de pop-ups</small></span>
+          <input type="color" data-chave="caixas" data-var="--cor-caixas" value="#FAEFFD"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor dos Itens do Menu Superior<small>Configure a cor</small></span>
+          <input type="color" data-chave="itensMenuSuperior" data-var="--cor-itens-superior" value="#FFFFFF"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor de Fundo<small>Fundo do sistema</small></span>
+          <input type="color" data-chave="fundo" data-var="--cor-fundo" value="#ECCCFA"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor da Barra de Pesquisa<small>Configure a cor</small></span>
+          <input type="color" data-chave="barraPesquisa" data-var="--cor-busca" value="#F1E5FB"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor do Menu Superior<small>Configure a cor</small></span>
+          <input type="color" data-chave="menuSuperior" data-var="--cor-menu-superior" value="#972BB2"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor do Texto Principal<small>Configure a cor</small></span>
+          <input type="color" data-chave="textoPrincipal" data-var="--cor-texto" value="#000000"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor do Menu Lateral<small>Configure a cor</small></span>
+          <input type="color" data-chave="menuLateral" data-var="--cor-menu-lateral" value="#972BB2"><code></code></label>
+        <label class="cor-item"><span class="cor-nome">Cor dos Ícones e Botões<small>Configure a cor</small></span>
+          <input type="color" data-chave="iconesBotoes" data-var="--cor-icones" value="#FFFFFF"><code></code></label>
+      </div>
+    </div>
+  </section>
+ 
+  <div class="rodape-acoes">
+    <span id="status" role="status" aria-live="polite"></span>
+    <button type="button" id="btnSalvar" class="btn-personalizar">Salvar Alterações</button>
+  </div>
+</div>
+{% endblock %}
+ 
+{% block js %}
+<script src="{{ url_for('static', filename='js/personalizar_loja.js') }}"></script>
+{% endblock %}
+ 

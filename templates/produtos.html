@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -5,26 +6,27 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/produtos.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/produtos.css') }}"
+    >
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/modal-produto.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/modal-produto.css') }}"
+    >
 {% endblock %}
 
 {% block content %}
 
 <header id="titulo">
-
     <div class="titulo-produtos">
-
-        <i class="fas fa-box icone-loja"></i>
+        <i class="fas fa-box icone-loja" aria-hidden="true"></i>
 
         <div class="texto-header">
             <h1>Meus Produtos</h1>
             <p>Gerencie os produtos da sua loja de forma simples e rápida.</p>
         </div>
-
     </div>
 
     <button
@@ -34,9 +36,7 @@
     >
         + Adicionar Produto
     </button>
-
 </header>
-
 
 <section class="card-produtos">
 
@@ -44,82 +44,67 @@
 
         {% for produto in produtos %}
 
-            <div class="cards">
+            <article class="cards">
 
-                <img
-                    src="{{ produto.imagem if produto.imagem else '/static/img/produto-sem-imagem.png' }}"
-                    alt="{{ produto.nome }}"
+                <a
+                    href="{{ url_for('produto_detalhes', id_produto=produto.idProduto) }}"
+                    class="link-card"
                 >
+                    <img
+                        src="{{ url_for('static', filename=produto.imagem if produto.imagem else 'img/produto-sem-imagem.png') }}"
+                        alt="{{ produto.nome }}"
+                    >
 
-                <div class="info-produto">
+                    <div class="info-produto">
+                        <h3>{{ produto.nome }}</h3>
 
-                    <h3>{{ produto.nome }}</h3>
-
-                    <h2>
-                        R$ {{ "%.2f"|format(produto.valorBase)|replace(".", ",") }}
-                    </h2>
-
-                </div>
+                        <h2>
+                            R$ {{ "%.2f"|format(produto.valorBase)|replace(".", ",") }}
+                        </h2>
+                    </div>
+                </a>
 
                 <div class="info-estoque">
-
-                    <i class="fas fa-circle"></i>
-
-                    <h4>
-                        {% if produto.estoque > 0 %}
-                            Em estoque ({{ produto.estoque }})
-                        {% else %}
-                            Sem estoque
-                        {% endif %}
-                    </h4>
-
+                    {% if produto.estoque > 0 %}
+                        <i class="fas fa-circle-check"></i>
+                        <h4>Em estoque ({{ produto.estoque }})</h4>
+                    {% else %}
+                        <h4>Sem estoque</h4>
+                    {% endif %}
                 </div>
 
                 <div class="edit-delete">
-
-                    <button type="button">
-                        <i class="fas fa-pen"></i>
-                        Editar
+                    <button type="button" onclick="abrirModalEdicao({{ produto.idProduto }})">
+                        <i class="fas fa-pen"></i> Editar
                     </button>
-
-                    <button
-                        type="button"
-                        title="Excluir produto"
-                        data-id="{{ produto.idProduto }}"
-                    >
+                    <button type="button" onclick="deletarItem({{ produto.idProduto }})" aria-label="Excluir">
                         <i class="fas fa-trash-alt"></i>
                     </button>
-
                 </div>
 
-            </div>
+            </article>
 
         {% endfor %}
 
     {% else %}
 
         <div class="nenhum-produto">
-
-            <i class="fas fa-box-open"></i>
+            <i class="fas fa-box-open" aria-hidden="true"></i>
 
             <h3>Nenhum produto cadastrado</h3>
 
             <p>
-                Clique em "+ Adicionar Produto"
-                para cadastrar seu primeiro produto.
+                Clique em "+ Adicionar Produto" para cadastrar seu primeiro produto.
             </p>
-
         </div>
 
     {% endif %}
 
 </section>
 
-
-<!-- Modal de cadastro de produto -->
+<!-- Modal incluído uma única vez, fora da listagem -->
 {% include "partials/modal_produto.html" %}
 
-
-<script src="{{ url_for('static', filename='js/produtos.js') }}"></script>
+<script src="{{ url_for('static', filename='js/produtos.js') }}" defer></script>
 
 {% endblock %}

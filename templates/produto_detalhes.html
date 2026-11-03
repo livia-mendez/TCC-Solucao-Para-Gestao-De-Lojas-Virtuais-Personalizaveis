@@ -1,56 +1,76 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Detalhes Produto - EasyStore
+    {{ produto.nome }} - EasyStore
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="/static/css/produto_detalhes.css">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/produto_detalhes.css') }}"
+    >
 {% endblock %}
 
 {% block content %}
     <header>
         <div class="inicio-pagina">
-            <a href="/produtos.html" class="botao-voltar"><i>&larr;</i> Voltar</a>
+            <a href="{{ url_for('produtos') }}" class="botao-voltar"><i>&larr;</i> Voltar</a>
         </div>
         <div class="acoes">
-            <button type="button" class="btn-edit" onclick="abrirModalEdicao(1)"><i class="fas fa-edit"></i> Editar</button>
-            <button type="button" class="btn-excluir" onclick="deletarItem(1)"><i class="fas fa-trash-alt"></i> Excluir</button>
+            <button type="button" class="btn-edit" onclick="abrirModalEdicao({{ produto.idProduto }})">
+                <i class="fas fa-edit"></i> Editar
+            </button>
+            <button type="button" class="btn-excluir" onclick="deletarItem({{ produto.idProduto }})">
+                <i class="fas fa-trash-alt"></i> Excluir
+            </button>
         </div>
     </header>
 
-    <body>
-        <div class="container">
-            <div class="img-produtos">
-                <img>
-                <img>
-            </div> 
+    <div class="container">
+        <div class="img-produtos">
+            {% set capa = imagens[0].caminho if imagens else 'img/produto-sem-imagem.png' %}
+            <img id="imagemPrincipal"
+                src="{{ url_for('static', filename=capa) }}"
+                alt="{{ produto.nome }}">
 
-            <div class="info-produto">
-                <div class="info-header">
-                    <h2>Nome Produto</h2>
-                    <h3>R$ 39,99</h3>
-                </div>
-
-                <div class="cores">
-                    <h4>CORES DISPONÍVEIS</h4>
-                    <div class="circulo-cores"></div>
-                </div>
-
-                <div class="tamanhos">
-                    <h4>TAMANHOS</h4>
-                    <div class="guia-tamanhos"></div>
-                </div>
-
-                <div class="descricao">
-                    <h4>DESCRIÇÃO</h4>
-                    <p>Camiseta Masculina,  fabricada com um tecido premium, 70% linho e 30% algodão com várias cores e tamanhos disponíveis disponíveis. Fabricada com tecido importado.</p>
-                </div>
-
-                <button class="btn-add-carrinho"><i class="fa-solid fa-cart-shopping"></i>Adicionar ao Carrinho</button>
+            {% if imagens|length > 1 %}
+            <div class="miniaturas">
+                {% for img in imagens %}
+                    <img src="{{ url_for('static', filename=img.caminho) }}"
+                        alt="Imagem {{ loop.index }}"
+                        onclick="document.getElementById('imagemPrincipal').src = this.src">
+                {% endfor %}
             </div>
+            {% endif %}
         </div>
-    </body>
 
+        {% for nome, opcoes in atributos.items() %}
+            <div class="atributo">
+                <h4>{{ nome|upper }}</h4>
+                <div class="opcoes">
+                    {% for opcao in opcoes %}
+                        <button type="button" class="opcao">{{ opcao }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
 
+        <div class="info-produto">
+            <div class="info-header">
+                <h2>{{ produto.nome }}</h2>
+                <h3>R$ {{ "%.2f"|format(produto.valorBase)|replace(".", ",") }}</h3>
+            </div>
+
+            {# Cores e tamanhos entram quando as variações forem salvas no banco #}
+
+            <div class="descricao">
+                <h4>DESCRIÇÃO</h4>
+                <p>{{ produto.descricao }}</p>
+            </div>
+
+            <button class="btn-add-carrinho">
+                <i class="fa-solid fa-cart-shopping"></i>Adicionar ao Carrinho
+            </button>
+        </div>
+    </div>
 {% endblock %}

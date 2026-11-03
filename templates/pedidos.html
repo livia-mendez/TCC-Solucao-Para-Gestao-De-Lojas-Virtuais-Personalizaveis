@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home - EasyStore
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/pedidos.css">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Cabeçalho -->
+    <header id="titulo">
+        <div class="titulo-produtos">
+            <i class="fas fa-store icone-loja"></i>
+
+            <div class="texto-header">
+                <h1>Gerênciar Pedidos</h1>
+                <p>Visualize e Gerencie os pedidos realizados em sua loja. </p>
+            </div>
+        </div>
+
+        <button
+            type="button"
+            class="btn-novo-produto"
+            id="btn-abrir-modal"></button>
+    </header>
+
+
+
+{% endblock %}

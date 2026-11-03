@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+ 
+{% block title %}
+    Categorias - EasyStore
+{% endblock %}
+ 
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/categorias.css') }}"
+    >
+{% endblock %}
+ 
+{% block content %}
+ 
+<header id="titulo">
+    <div class="titulo-produtos">
+        <i class="fa-solid fa-border-all  icone-loja"></i>
+ 
+        <div class="texto-header">
+            <h1>Categorias</h1>
+            <p>Gerencie as categorias para facilitar as buscas do seu produto</p>
+        </div>
+    </div>
+ 
+    <button
+        type="button"
+        class="btn-novo-produto"
+        id="btn-abrir-modal"
+    >
+        + Adicionar Categoria
+    </button>
+</header>
+ 
+ 
+<!-- ==================================
+     CATEGORIAS CRIADAS
+=================================== -->
+<section
+    class="card-categorias"
+    id="cardCategorias"
+    aria-labelledby="tituloCardCategorias"
+    data-url-cadastrar="{{ url_for('cadastrar_categoria') }}"
+    data-url-editar="{{ url_for('editar_categoria', id_categoria=0) }}"
+    data-url-excluir="{{ url_for('excluir_categoria') }}"
+>
+    <div class="card-categorias-topo">
+        <h2 id="tituloCardCategorias">Categorias Criadas</h2>
+ 
+        <div class="acoes-card">
+            <button
+                type="button"
+                class="btn-acao-card btn-modo-editar"
+                id="btnModoEditar"
+                aria-pressed="false"
+            >
+                <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+                <span id="textoBtnEditar">Editar</span>
+            </button>
+ 
+            <button
+                type="button"
+                class="btn-acao-card btn-modo-excluir"
+                id="btnModoExcluir"
+                aria-pressed="false"
+            >
+                <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+                <span id="textoBtnExcluir">Excluir</span>
+            </button>
+        </div>
+    </div>
+ 
+    <p class="dica-modo" id="dicaModo" hidden></p>
+ 
+    <ul class="lista-categorias" id="listaCategorias"></ul>
+ 
+    <p class="mensagem-vazia-categorias" id="mensagemSemCategorias" hidden>
+        Você ainda não possui categorias. Clique em
+        "+ Adicionar Categoria" para criar a primeira.
+    </p>
+ 
+    <!-- Dados das categorias vindos do Flask (lidos pelo categorias.js) -->
+    <script type="application/json" id="dadosCategorias">
+    [
+        {%- for categoria in categorias -%}
+        {
+            "idCategoria": {{ categoria.idCategoria | tojson }},
+            "nome": {{ categoria.nome | tojson }},
+            "icone": {{ (categoria.icone or 'shirt') | tojson }}
+        }{% if not loop.last %},{% endif %}
+        {%- endfor -%}
+    ]
+    </script>
+</section>
+ 
+ 
+<!-- ==================================
+     MODAL: ADICIONAR / EDITAR CATEGORIA
+=================================== -->
+<div
+    class="modal-cat"
+    id="modalCategoria"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tituloModalCategoria"
+    hidden
+>
+    <div class="modal-cat-caixa">
+ 
+        <header class="modal-cat-header">
+            <h2 id="tituloModalCategoria">Adicionar Categoria</h2>
+ 
+            <button
+                type="button"
+                class="btn-fechar-cat"
+                id="btnFecharModalCategoria"
+                aria-label="Fechar"
+            >
+                &times;
+            </button>
+        </header>
+ 
+        <form id="formCategoria" novalidate>
+            <div class="modal-cat-card">
+ 
+                <div class="titulo-cat">
+                    <h3 id="subtituloModalCategoria">Nova categoria</h3>
+                    <p>Defina o nome e o ícone que aparecem na sua loja.</p>
+                </div>
+ 
+                <div class="campo-cat">
+                    <label for="nomeCategoria">
+                        Nome <span class="obrigatorio-cat">*</span>
+                    </label>
+ 
+                    <input
+                        type="text"
+                        id="nomeCategoria"
+                        placeholder="Ex.: Feminino"
+                        maxlength="40"
+                        autocomplete="off"
+                    >
+ 
+                    <small class="contador-cat" id="contadorNomeCategoria">0/40</small>
+                </div>
+ 
+                <fieldset class="campo-cat">
+                    <legend>Ícone</legend>
+ 
+                    <div class="grade-icones" id="gradeIcones"></div>
+                </fieldset>
+ 
+                <p
+                    class="mensagem-erro-cat"
+                    id="erroCategoria"
+                    role="alert"
+                    hidden
+                ></p>
+ 
+            </div>
+ 
+            <footer class="modal-cat-footer">
+                <button
+                    type="button"
+                    class="btn-cat btn-cat-secundario"
+                    id="btnCancelarCategoria"
+                >
+                    Cancelar
+                </button>
+ 
+                <button
+                    type="submit"
+                    class="btn-cat btn-cat-principal"
+                    id="btnSalvarCategoria"
+                >
+                    Salvar
+                </button>
+            </footer>
+        </form>
+ 
+    </div>
+</div>
+ 
+ 
+<!-- ==================================
+     MODAL: CONFIRMAR EXCLUSÃO
+=================================== -->
+<div
+    class="modal-cat"
+    id="modalExcluirCategoria"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tituloModalExcluir"
+    hidden
+>
+    <div class="modal-cat-caixa modal-cat-pequeno">
+ 
+        <header class="modal-cat-header">
+            <h2 id="tituloModalExcluir">Excluir Categoria</h2>
+ 
+            <button
+                type="button"
+                class="btn-fechar-cat"
+                id="btnFecharModalExcluir"
+                aria-label="Fechar"
+            >
+                &times;
+            </button>
+        </header>
+ 
+        <div class="modal-cat-card">
+            <div class="titulo-cat">
+                <h3 id="subtituloModalExcluir">Tem certeza?</h3>
+                <p id="textoModalExcluir"></p>
+            </div>
+ 
+            <ul class="lista-exclusao" id="listaExclusao"></ul>
+ 
+            <p
+                class="mensagem-erro-cat"
+                id="erroExclusao"
+                role="alert"
+                hidden
+            ></p>
+        </div>
+ 
+        <footer class="modal-cat-footer">
+            <button
+                type="button"
+                class="btn-cat btn-cat-secundario"
+                id="btnCancelarExclusao"
+            >
+                Cancelar
+            </button>
+ 
+            <button
+                type="button"
+                class="btn-cat btn-cat-perigo"
+                id="btnConfirmarExclusao"
+            >
+                Excluir
+            </button>
+        </footer>
+ 
+    </div>
+</div>
+ 
+ 
+<!-- AVISO RÁPIDO (sucesso ou erro) -->
+<div class="aviso-categorias" id="avisoCategorias" role="status" hidden></div>
+ 
+<script
+    src="{{ url_for('static', filename='js/categorias.js') }}"
+    defer
+></script>
+ 
+{% endblock %}
